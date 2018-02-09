@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <script src="../common/js/jquery-3.2.1.min.js"></script>
+    <script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+    <style>
+        .container{
+            margin: 10px auto;
+        }
+        .content{
+            background-color:aqua ;
+            margin: 10px auto;
+            width: 100%;
+            height: 500px;
+        }
+        #container{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="select-wrapper">
+            <select class="form-control">
+                <option value="0">体育</option>
+                <option value="1">地理</option>
+                <option value="2">历史</option>
+                <!-- <option value="4">4</option>
+                <option value="5">5</option> -->
+            </select>
+        </div>
+        <div class="content">
+            <div id="container" name="content" type="text/plain">
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+    var ue = UE.getEditor('container');
+    //对编辑器的操作最好在编辑器ready之后再做
+    ue.ready(function(){
+        //设置编辑器的内容
+        ue.setContent('这里写你的初始化内容');
+        //获取html内容，返回: <p>hello</p>
+        // var html = ue.getContent();
+        // var txt = ue.getContentTxt();
+    });
+    
+    var optionVal; 
+    $('.select-wrapper>.form-control').on('change',()=> {
+        optionVal = $( ".form-control option:selected" ).val();
+        var request = $.ajax({
+            type:"get",
+            dataType:"text",
+            url: "http://dphp/project/ajax/xmlContent/dataSource.php?type="+optionVal,
+            async:true,
+            // success:function(data){//method 1
+            //     ue.ready(function(){
+            //     //设置编辑器的内容
+            //     ue.setContent(data);
+            //     });
+            // },
+            // error:function(){
+            //     console.log("请求失败error");
+            // }
+    });
+
+    request.done(function( msg ) {//method 2
+        ue.ready(function(){
+            //设置编辑器的内容
+            ue.setContent(msg);
+            //获取html内容，返回: <p>hello</p>
+            // var html = ue.getContent();
+            // var txt = ue.getContentTxt();
+            });
+		});
+    request.fail(function( jqXHR, textStatus ) {
+        console.log( "fail " + textStatus );
+    });
+        
+})
+</script>
+</html>
