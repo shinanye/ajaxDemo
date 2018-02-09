@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="tool/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../common/js/jquery-3.2.1.min.js"></script>
-    <script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+    <script src="tool/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
         .container{
             margin: 10px auto;
@@ -43,9 +43,9 @@
     </div>
     
 </body>
-<script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
-<script type="text/javascript" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 <script>
     var ue = UE.getEditor('container');
     //对编辑器的操作最好在编辑器ready之后再做
@@ -63,7 +63,7 @@
         var request = $.ajax({
             type:"get",
             dataType:"text",
-            url: "http://dphp/project/ajax/xmlContent/dataSource.php?type="+optionVal,
+            url: "http://dphp/phpfile/xmlContent/dataSource.php?type="+optionVal,
             async:true,
             // success:function(data){//method 1
             //     ue.ready(function(){
